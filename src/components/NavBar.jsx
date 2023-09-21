@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
-import { MdDashboard, MdFeedback, MdPhotoLibrary, MdLogout } from "react-icons/md";
+import { MdDashboard, MdFeedback, MdPhotoLibrary, MdLogout, MdSearch } from "react-icons/md";
 import { useState } from 'react';
 
 const NavBar = ({searchTerm, setSearchTerm, handleClick, getUser}) => {
@@ -18,13 +18,16 @@ const NavBar = ({searchTerm, setSearchTerm, handleClick, getUser}) => {
               <Link className='text-xl p-[30px] border-b-[5px] border-teal-900 hover:border-rose-700'>My Photo</Link>
               <Link className='text-xl p-[30px] border-b-[5px] border-teal-900 hover:border-rose-700'>Feed</Link>
             </div>
-            <input 
-            type="text" 
-            placeholder='Search images by tag' 
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className='border-[1px] border-teal-900 shadow-md shadow-teal-400 rounded-3xl px-4 py-1 outline-0'
-            />
+            <div className='relative inline-block '>
+              <input 
+              type="text" 
+              placeholder='Search images by tag' 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className='border-[1px] border-teal-900 shadow-md shadow-teal-400 rounded-3xl px-4 py-1 outline-0'
+              />
+              <MdSearch className='absolute right-3 top-[15%] text-2xl' />
+            </div>
         </div>
         {/* ======= SideBar ======== */}
         <div className={menu ? "flex bg-white text-teal-900 w-[200px] border-r-2 h-full justify-between items-start flex-col font-bold p-5 pt-8 fixed top-0 left-0 z-10" : 'hidden'}>
@@ -39,13 +42,16 @@ const NavBar = ({searchTerm, setSearchTerm, handleClick, getUser}) => {
             </div>
         </div>
         <div className="flex flex-col justify-center items-center gap-4">
-        <input 
-            type="text" 
-            placeholder='Search' 
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className='border-[1px] border-teal-900 shadow-md shadow-teal-400 rounded-3xl px-4 py-1 w-[80%] outline-0'
-        />
+        <div className='relative inline-block w-[80%]'>
+              <input 
+              type="text" 
+              placeholder='Search' 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className='w-full border-[1px] border-teal-900 shadow-md shadow-teal-400 rounded-3xl px-4 py-1 outline-0'
+              />
+              <MdSearch className='absolute right-3 top-[15%] text-2xl' />
+            </div>
         <div className="border-[2px] grid place-items-center py-3 px-10 rounded-md">
             <div className="w-[55px] h-[55px] rounded-full bg-teal-800 text-white grid place-items-center text-2xl shadow-lg shadow-rose-700">{getUser}</div>
             <span className="border-t-[1px] border-rose-700 mt-5 font-thin">User</span>
