@@ -12,6 +12,7 @@ function Auth() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/reset" element={<ForgetPassword />} />
+        <Route path="*" element={<h1>This Page is not Found</h1>} />
       </Routes>
     </>
   );
