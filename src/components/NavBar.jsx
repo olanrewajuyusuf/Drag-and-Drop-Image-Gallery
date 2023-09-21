@@ -4,7 +4,7 @@ import { IoMdClose } from "react-icons/io";
 import { MdDashboard, MdFeedback, MdPhotoLibrary, MdLogout } from "react-icons/md";
 import { useState } from 'react';
 
-const NavBar = ({searchTerm, setSearchTerm, handleClick}) => {
+const NavBar = ({searchTerm, setSearchTerm, handleClick, getUser}) => {
   const [menu, setMenu] = useState(false);
 
   return (
@@ -46,6 +46,10 @@ const NavBar = ({searchTerm, setSearchTerm, handleClick}) => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className='border-[1px] border-teal-900 shadow-md shadow-teal-400 rounded-3xl px-4 py-1 w-[80%] outline-0'
         />
+        <div className="border-[2px] grid place-items-center py-3 px-10 rounded-md">
+            <div className="w-[55px] h-[55px] rounded-full bg-teal-800 text-white grid place-items-center text-2xl shadow-lg shadow-rose-700">{getUser}</div>
+            <span className="border-t-[1px] border-rose-700 mt-5 font-thin">User</span>
+          </div>
         <span className="items-self-end flex justify-center items-center gap-2.5 cursor-pointer" onClick={handleClick}><MdLogout className="text-rose-700" />Log Out</span>
         </div>
     </div>

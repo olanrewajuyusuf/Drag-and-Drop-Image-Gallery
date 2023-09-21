@@ -33,11 +33,19 @@ const Dashboard = () => {
     }
     const searchImage = filteredImage(searchTerm);
 
+    // Getting User
+    const user = database.currentUser.email;
+    let arr = [];
+    for (let i = 0; i < user.length; i++){
+      arr.push(user[i])
+    }
+    const getUser = arr.slice(0,2); 
+
   return (
     <div className="flex justify-start items-start h-screen">
-        <SideBar  handleClick={handleClick}/>
+        <SideBar  handleClick={handleClick} getUser={getUser} />
         <div className="w-full">
-          <NavBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleClick={handleClick} />
+          <NavBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleClick={handleClick} getUser={getUser} />
           <Gallery searchTerm={searchTerm} searchImage={searchImage} />
         </div>
     </div>

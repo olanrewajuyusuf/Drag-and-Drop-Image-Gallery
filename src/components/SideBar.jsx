@@ -1,7 +1,9 @@
 import { MdDashboard, MdFeedback, MdPhotoLibrary, MdLogout } from "react-icons/md";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { database } from "../firebase/config";
 
-const SideBar = ({ handleClick }) => {
+const SideBar = ({ handleClick, getUser }) => { 
+
   return (
     <div className="hidden bg-white text-teal-900 w-[200px] border-r-2 h-full lg:flex justify-between items-start flex-col font-bold p-5 pt-8">
         <div>
@@ -14,7 +16,13 @@ const SideBar = ({ handleClick }) => {
               </nav>
             </div>
         </div>
-        <span className="items-self-end flex justify-center items-center gap-2.5 cursor-pointer" onClick={handleClick}><MdLogout className="text-rose-700" />Log Out</span>
+        <div className="flex flex-col justify-center items-center gap-4">
+          <div className="border-[2px] grid place-items-center py-3 px-10 rounded-md">
+            <div className="w-[55px] h-[55px] rounded-full bg-teal-800 text-white grid place-items-center text-2xl shadow-lg shadow-rose-700">{getUser}</div>
+            <span className="border-t-[1px] border-rose-700 mt-5 font-thin">User</span>
+          </div>
+          <span className="items-self-end flex justify-center items-center gap-2.5 cursor-pointer" onClick={handleClick}><MdLogout className="text-rose-700" />Log Out</span>
+        </div>
     </div>
   )
 }
