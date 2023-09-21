@@ -52,7 +52,7 @@ const Gallery = ({ searchTerm, searchImage}) => {
 
   return (
     <>
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-8">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 px-[10px] py-10 md:px-10">
       {loading && (
       <div className="grid place-items-center">
         <div className="loader"></div>

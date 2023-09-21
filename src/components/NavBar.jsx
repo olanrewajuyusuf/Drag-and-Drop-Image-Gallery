@@ -8,7 +8,7 @@ const NavBar = ({searchTerm, setSearchTerm, handleClick, getUser}) => {
   const [menu, setMenu] = useState(false);
 
   return (
-    <header className='text-teal-900 h-[100px] border-b-2 px-10 flex justify-between items-center'>
+    <header className='text-teal-900 h-[100px] border-b-2 px-[10px] md:px-10 flex justify-between items-center'>
       <h1 className='text-2xl font-bold lg:hidden'><span className='text-rose-900 '>D&D</span>Gallery</h1>
       {!menu && <HiMenuAlt3 className='lg:hidden text-2xl cursor-pointer' onClick={() => setMenu(!menu)}/>}
       {menu && <IoMdClose className='lg:hidden text-2xl cursor-pointer' onClick={() => setMenu(!menu)} />}
