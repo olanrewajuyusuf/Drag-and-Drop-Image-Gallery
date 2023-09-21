@@ -1,6 +1,5 @@
 import { MdDashboard, MdFeedback, MdPhotoLibrary, MdLogout } from "react-icons/md";
 import { Link } from 'react-router-dom';
-import { database } from "../firebase/config";
 
 const SideBar = ({ handleClick, getUser }) => { 
 

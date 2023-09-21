@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import Gallery from "./Gallery";
 import NavBar from "./NavBar";
 import SideBar from "./SideBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import imageDatas from "./ImageDatas";
 
 const Dashboard = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentUser, setCurrentUser] = useState('');
     const navigate = useNavigate();
 
     const handleClick = ()=> {
@@ -33,19 +34,44 @@ const Dashboard = () => {
     }
     const searchImage = filteredImage(searchTerm);
 
+
     // Getting User
-    const user = database.currentUser.email;
-    let arr = [];
-    for (let i = 0; i < user.length; i++){
-      arr.push(user[i])
-    }
-    const getUser = arr.slice(0,2); 
+    useEffect(()=> {
+      let currentUser = database.currentUser;
+
+      if (currentUser){
+        let user = currentUser.email;
+        let arr = [];
+
+        for (let i = 0; i < user.length; i++){
+          arr.push(user[i])
+        }
+        setCurrentUser(arr.slice(0,2));
+      } else {
+        setCurrentUser('');
+      }
+
+      return () => {
+        database.onAuthStateChanged((user) => {
+          if (user) {
+            let arr = [];
+            for (let i = 0; i < user.email.length; i++){
+              arr.push(user.email[i])
+            }
+            setCurrentUser(arr.slice(0,2));
+          } else {
+            console.log("No user Found");
+          }
+        })
+      }
+
+    }, []);
 
   return (
     <div className="flex justify-start items-start h-screen">
-        <SideBar  handleClick={handleClick} getUser={getUser} />
+        <SideBar  handleClick={handleClick} getUser={currentUser} />
         <div className="w-full">
-          <NavBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleClick={handleClick} getUser={getUser} />
+          <NavBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleClick={handleClick} getUser={currentUser} />
           <Gallery searchTerm={searchTerm} searchImage={searchImage} />
         </div>
     </div>
