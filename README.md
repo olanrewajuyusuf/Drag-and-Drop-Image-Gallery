@@ -52,7 +52,7 @@ Follow these steps to set up and run the application:
 
 ### Image Display
 
-1. Prepare a collection of images that you want to showcase in the gallery.
+1. Prepare a collection of images or pictures that you want to showcase in the gallery.
 
 2. Define the image data in the `ImageDatas.js` file.
 
