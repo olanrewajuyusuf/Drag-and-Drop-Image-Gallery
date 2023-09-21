@@ -10,7 +10,7 @@ const imageDatas = [
     {id: 9, url: 'lagos-3.jpg', tag: 'City'},
     {id: 10, url: 'car-1.jpg', tag: 'Car'},
     {id: 11, url: 'car-2.jpg', tag: 'Car'},
-    {id: 12, url: 'car-3.avif', tag: 'Car'},
+    {id: 12, url: 'car-3.jpg', tag: 'Car'},
 ];
 
 export default imageDatas;
