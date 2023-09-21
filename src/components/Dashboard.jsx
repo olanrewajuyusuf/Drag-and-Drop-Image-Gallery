@@ -33,6 +33,21 @@ const Dashboard = () => {
     //     tag.toLowerCase().includes(searchTerm.toLowerCase())
     //   )
     // });
+    const filteredImage = (query) => {
+      // Convert the query to lowercase for case-insensitive search
+      const lowercaseQuery = query.toLowerCase();
+
+      // Use the filter method to find matching items
+      const results = images.filter(item => {
+        // Check if any of the properties contains the query
+        return (
+          item.tag.toLowerCase().includes(lowercaseQuery)
+        );
+      });
+
+      return results;
+    }
+    const searchImage = filteredImage(searchTerm);
 
   return (
     <div className="flex justify-start items-start h-screen">
@@ -40,7 +55,7 @@ const Dashboard = () => {
         <div className="w-full">
           <NavBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleClick={handleClick} />
           <DndProvider backend={HTML5Backend}>
-            <Gallery imageDatas={images} loading={loading} searchTerm={searchTerm} />
+            <Gallery imageDatas={images} loading={loading} searchTerm={searchTerm} searchImage={searchImage} />
           </DndProvider>
         </div>
     </div>

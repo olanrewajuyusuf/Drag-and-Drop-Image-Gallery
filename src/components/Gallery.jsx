@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDrop } from "react-dnd"
 import Photo from "./Photo"
 
-const Gallery = ({imageDatas, loading, filteredImages, searchTerm}) => {
+const Gallery = ({imageDatas, loading, searchImage, searchTerm}) => {
   const [board, setBoard] = useState([]);
   const [{isOver}, drop] = useDrop(()=>({
     accept: 'image',
@@ -22,7 +22,7 @@ const Gallery = ({imageDatas, loading, filteredImages, searchTerm}) => {
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
       {loading && <div className="loading-spinner">Loading...</div>}
         
-      {!loading  && (
+      {!loading && searchTerm === "" ? (
           imageDatas.map(image => {
               return (
                 <div key={image.id} className="relative">
@@ -32,14 +32,14 @@ const Gallery = ({imageDatas, loading, filteredImages, searchTerm}) => {
               );
             })
         ) 
-        // : (
-        //   filteredImages.map((image) => (
-        //     <div key={image.id} className="relative">
-        //       <Photo image={image.url} id={image.id} tag={image.tag} />
-        //       <span className="bg-white px-1 rounded absolute top-2 left-2">{image.tag}</span>
-        //     </div>
-        //   ) 
-        //   ))
+        : (
+          searchImage.map((image) => (
+            <div key={image.id} className="relative">
+              <Photo image={image.url} id={image.id} tag={image.tag} />
+              <span className="bg-white px-1 rounded absolute top-2 left-2">{image.tag}</span>
+            </div>
+          ) 
+          ))
       }
     </div>
     <div ref={drop} className={isOver ? "w-[100%] md:w-[300px] h-[480px] bg-teal-400 border-2 border-rose-500 rounded-lg" : "w-[100%] md:w-[300px] h-[480px] bg-teal-400 border-2 rounded-lg"}>
