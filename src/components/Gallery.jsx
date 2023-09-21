@@ -35,7 +35,12 @@ const Gallery = ({ searchTerm, searchImage}) => {
   return (
     <>
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-8">
-      {loading && <h1>Loading</h1>}
+      {loading && (
+      <div className="grid place-items-center">
+        <div className="loader"></div>
+        <p className="text-xl">Loading...</p>
+      </div>
+      )}
       {!loading && searchTerm === "" ? ( 
       images.map((image, index) => (
         <div key={index} className="relative">
