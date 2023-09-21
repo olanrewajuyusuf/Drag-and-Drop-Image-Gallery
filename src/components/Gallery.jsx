@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 const Gallery = ({ searchTerm, searchImage}) => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [draggedIndex, setDraggedIndex] = useState(null);
+  const [dropTargetIndex, setDropTargetIndex] = useState(null);
 
   useEffect(() => {
     setTimeout(() => {
@@ -14,6 +16,17 @@ const Gallery = ({ searchTerm, searchImage}) => {
 
   const handleDragStart = (e, index) => {
     e.dataTransfer.setData("imageIndex", index);
+    setDraggedIndex(index);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedIndex(null);
+    setDropTargetIndex(null);
+  };
+
+  const handleDragOver = (e, index) => {
+    e.preventDefault();
+    setDropTargetIndex(index);
   };
 
   const handleDrop = (e, targetIndex) => {
@@ -21,16 +34,21 @@ const Gallery = ({ searchTerm, searchImage}) => {
 
     const sourceIndex = e.dataTransfer.getData("imageIndex");
 
-    const updatedImages = [...images];
-    const draggedImage = updatedImages.splice(sourceIndex, 1)[0];
-    updatedImages.splice(targetIndex, 0, draggedImage);
+    if (sourceIndex !== targetIndex) {
+      // Perform image reordering
+      const updatedImages = [...images];
+      const draggedImage = updatedImages.splice(sourceIndex, 1)[0];
+      updatedImages.splice(targetIndex, 0, draggedImage);
 
-    setImages(updatedImages);
+      setImages(updatedImages);
+    }
+
+    setDraggedIndex(null);
+    setDropTargetIndex(null);
   };
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
+  const isBeingDragged = (index) => index === draggedIndex;
+  const isDropTarget = (index) => index === dropTargetIndex;
 
   return (
     <>
@@ -49,9 +67,10 @@ const Gallery = ({ searchTerm, searchImage}) => {
           alt={image.url}
           draggable={true}
           onDragStart={(e) => handleDragStart(e, index)}
-          onDragOver={handleDragOver}
+          onDragEnd={handleDragEnd}
+          onDragOver={(e) => handleDragOver(e, index)}
           onDrop={(e) => handleDrop(e, index)}
-          className="w-[100%]  h-[150px] rounded-md object-cover cursor-pointer"
+          className={`image ${isBeingDragged(index) ? "dragging" : ""} ${isDropTarget(index) ? "drop-target" : ""}`}
         />
         <span className="bg-white px-1 rounded absolute top-2 left-2">{image.tag}</span>
         </div>
@@ -63,9 +82,10 @@ const Gallery = ({ searchTerm, searchImage}) => {
             alt={image.url}
             draggable={true}
             onDragStart={(e) => handleDragStart(e, index)}
-            onDragOver={handleDragOver}
+            onDragEnd={handleDragEnd}
+            onDragOver={(e) => handleDragOver(e, index)}
             onDrop={(e) => handleDrop(e, index)}
-            className="w-[100%]  h-[150px] rounded-md object-cover cursor-pointer"
+            className={`image ${isBeingDragged(index) ? "dragging" : ""}, ${isDropTarget(index) ? "drop-target" : ""}`}
           />
           <span className="bg-white px-1 rounded absolute top-2 left-2">{image.tag}</span>
           </div>

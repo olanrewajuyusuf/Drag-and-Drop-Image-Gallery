@@ -37,3 +37,19 @@ div.loader {
     transform: rotate(360deg);
   }
 }
+
+.image {
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  cursor: grab;
+  transition: transform 0.2s ease-in-out;
+}
+
+.image.dragging {
+  transform: scale(1.1); 
+}
+
+.image.drop-target {
+  border: 2px dashed red; 
+}
