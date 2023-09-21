@@ -42,7 +42,7 @@ const Gallery = ({imageDatas, loading, filteredImages, searchTerm}) => {
         //   ))
       }
     </div>
-    <div ref={drop} className="w-[100%] md:w-[300px] h-[480px] bg-teal-400 border-2 rounded-lg">
+    <div ref={drop} className={isOver ? "w-[100%] md:w-[300px] h-[480px] bg-teal-400 border-2 border-rose-500 rounded-lg" : "w-[100%] md:w-[300px] h-[480px] bg-teal-400 border-2 rounded-lg"}>
         {board.map(image => {
           return (
             <div key={image.id} className="relative">
