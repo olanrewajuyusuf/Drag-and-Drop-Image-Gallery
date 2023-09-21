@@ -66,7 +66,7 @@ Follow these steps to set up and run the application:
 
 ### Drag-and-Drop
 
-- Implement drag-and-drop functionality using `react-dnd`. Ensure that the `useDrag`, `useDrop`, and `DndProvider` components are correctly used in your components.
+- Implement drag-and-drop functionality using `Events` and `Draggable` element. Ensure that the `onDragStart`, `onDrop`, and `onDragOver` components are correctly used in your components.
 
 ## Styling and User Experience
 

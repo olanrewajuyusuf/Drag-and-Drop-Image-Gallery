@@ -1,60 +1,74 @@
-import { useState } from "react"
-import { useDrop } from "react-dnd"
-import Photo from "./Photo"
+import imageDatas from "./ImageDatas";
+import React, { useState, useEffect } from "react";
 
-const Gallery = ({imageDatas, loading, searchImage, searchTerm}) => {
-  const [board, setBoard] = useState([]);
-  const [{isOver}, drop] = useDrop(()=>({
-    accept: 'image',
-    drop: (item) => addImageToBoard(item.id),
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver()
-    }),
-  }));
+const Gallery = ({ searchTerm, searchImage}) => {
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const addImageToBoard = (id) => {
-    const images = imageDatas.filter(image => id === image.id);
-    setBoard((board) => [...board,images[0]]);
-  }
+  useEffect(() => {
+    setTimeout(() => {
+      setImages(imageDatas);
+      setLoading(false);
+    }, 2000);
+  }, []);
+
+  const handleDragStart = (e, index) => {
+    e.dataTransfer.setData("imageIndex", index);
+  };
+
+  const handleDrop = (e, targetIndex) => {
+    e.preventDefault();
+
+    const sourceIndex = e.dataTransfer.getData("imageIndex");
+
+    const updatedImages = [...images];
+    const draggedImage = updatedImages.splice(sourceIndex, 1)[0];
+    updatedImages.splice(targetIndex, 0, draggedImage);
+
+    setImages(updatedImages);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
 
   return (
-    <div className="flex flex-col md:flex-row justify-center md:items-start items-center gap-3 p-[30px]">
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-      {loading && <div className="loading-spinner">Loading...</div>}
-        
-      {!loading && searchTerm === "" ? (
-          imageDatas.map(image => {
-              return (
-                <div key={image.id} className="relative">
-                  <Photo image={image.url} id={image.id} tag={image.tag} />
-                  <span className="bg-white px-1 rounded absolute top-2 left-2">{image.tag}</span>
-                </div>
-              );
-            })
-        ) 
-        : (
-          searchImage.map((image) => (
-            <div key={image.id} className="relative">
-              <Photo image={image.url} id={image.id} tag={image.tag} />
-              <span className="bg-white px-1 rounded absolute top-2 left-2">{image.tag}</span>
-            </div>
-          ) 
-          ))
-      }
+    <>
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-8">
+      {loading && <h1>Loading</h1>}
+      {!loading && searchTerm === "" ? ( 
+      images.map((image, index) => (
+        <div key={index} className="relative">
+        <img
+          src={image.url}
+          alt={image.url}
+          draggable={true}
+          onDragStart={(e) => handleDragStart(e, index)}
+          onDragOver={handleDragOver}
+          onDrop={(e) => handleDrop(e, index)}
+          className="w-[100%]  h-[150px] rounded-md object-cover cursor-pointer"
+        />
+        <span className="bg-white px-1 rounded absolute top-2 left-2">{image.tag}</span>
+        </div>
+      ))) : (
+        searchImage.map((image, index) => (
+          <div key={index} className="relative">
+          <img
+            src={image.url}
+            alt={image.url}
+            draggable={true}
+            onDragStart={(e) => handleDragStart(e, index)}
+            onDragOver={handleDragOver}
+            onDrop={(e) => handleDrop(e, index)}
+            className="w-[100%]  h-[150px] rounded-md object-cover cursor-pointer"
+          />
+          <span className="bg-white px-1 rounded absolute top-2 left-2">{image.tag}</span>
+          </div>
+        ))
+      )}
     </div>
-    <div ref={drop} className={isOver ? "w-[100%] md:w-[300px] h-[480px] bg-teal-400 border-2 border-rose-500 rounded-lg" : "w-[100%] md:w-[300px] h-[480px] bg-teal-400 border-2 rounded-lg"}>
-        {board.map(image => {
-          return (
-            <div key={image.id} className="relative">
-              <Photo image={image.url} id={image.id} tag={image.tag} />
-              <span className="bg-white px-1 rounded absolute top-2 left-2">{image.tag}</span>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  )
-}
+    </>
+  );
+};
 
-export default Gallery
-
+export default Gallery;

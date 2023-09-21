@@ -38,7 +38,16 @@ const NavBar = ({searchTerm, setSearchTerm, handleClick}) => {
               </nav>
             </div>
         </div>
+        <div className="flex flex-col justify-center items-center gap-4">
+        <input 
+            type="text" 
+            placeholder='Search' 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className='border-[1px] border-teal-900 shadow-md shadow-teal-400 rounded-3xl px-4 py-1 w-[80%] outline-0'
+        />
         <span className="items-self-end flex justify-center items-center gap-2.5 cursor-pointer" onClick={handleClick}><MdLogout className="text-rose-700" />Log Out</span>
+        </div>
     </div>
     </header>
   )

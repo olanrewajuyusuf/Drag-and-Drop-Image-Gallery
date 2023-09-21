@@ -14,7 +14,7 @@ const SideBar = ({ handleClick }) => {
               </nav>
             </div>
         </div>
-        <span className="items-self-end flex justify-center items-center gap-2.5" onClick={handleClick}><MdLogout className="text-rose-700" />Log Out</span>
+        <span className="items-self-end flex justify-center items-center gap-2.5 cursor-pointer" onClick={handleClick}><MdLogout className="text-rose-700" />Log Out</span>
     </div>
   )
 }
