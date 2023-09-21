@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Drag-and-Drop Image Gallery
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A fully functional and responsive image gallery with drag-and-drop functionality.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Overview](#overview)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Getting Started](#getting-started)
+  - [Authentication](#authentication)
+  - [Image Display](#image-display)
+  - [Loading State](#loading-state)
+  - [Search Functionality](#search-functionality)
+  - [Drag-and-Drop](#drag-and-drop)
+- [Styling and User Experience](#styling-and-user-experience)
+- [Known Issues](#known-issues)
+- [Contributing](#contributing)
+- [License](#license)
 
-### `npm start`
+## Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This application is a drag-and-drop image gallery that allows authenticated users to arrange and manage a collection of images. It provides a visually appealing way to showcase images with features such as authentication, responsive design, search functionality, and smooth drag-and-drop interactions.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
 
-### `npm test`
+- **Simple Authentication:** Users can log in using their email and password.
+- **Image Display:** Images are displayed in a visually appealing grid layout with tags.
+- **Loading State:** A loading state is displayed when images are not ready.
+- **Search Functionality:** Users can search for images based on tags.
+- **Drag-and-Drop:** Users can rearrange images within the gallery using drag-and-drop.
+- **Styling and User Experience:** The application offers a user-friendly and visually appealing design.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Requirements
 
-### `npm run build`
+Before running the application, make sure you have the following:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Node.js and npm (or yarn) installed.
+- Firebase or another authentication solution set up (with a user account for testing).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Follow these steps to set up and run the application:
 
-### `npm run eject`
+### Authentication
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Configure Firebase for authentication using your Firebase project. Update the Firebase configuration in the `firebase/config.js` file.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. Add user accounts to your Firebase project for testing. You can use the provided login credentials:
+   - **Email:** user@example.com
+   - **Password:** 1Password
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Image Display
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Prepare a collection of images that you want to showcase in the gallery.
 
-## Learn More
+2. Define the image data in the `ImageDatas.js` file.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Loading State
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- The application will display a loading state when images are not ready. You can customize the loading indicator in the UI components.
 
-### Code Splitting
+### Search Functionality
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- The search field filters images based on tags. Ensure that each image in the `ImageDatas.js` file has associated tags.
 
-### Analyzing the Bundle Size
+### Drag-and-Drop
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Implement drag-and-drop functionality using `react-dnd`. Ensure that the `useDrag`, `useDrop`, and `DndProvider` components are correctly used in your components.
 
-### Making a Progressive Web App
+## Styling and User Experience
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Customize the styling and user experience of the application according to your preferences. You have the creative freedom to design a unique and visually appealing gallery.
 
-### Advanced Configuration
+## Known Issues
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Still trying to fix the drop zone.
 
-### Deployment
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Contributions to this project are welcome! If you have any suggestions, bug fixes, or improvements, please open an issue or submit a pull request.
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Enjoy using the Drag-and-Drop Image Gallery! If you have any questions or need further assistance, please feel free to reach out.
